@@ -15,7 +15,7 @@
 ################################################################################
 
 CPU_JOB_NUM=$(grep processor /proc/cpuinfo | awk '{field=$NF};END{print field+1}')
-echo "make -j$CPU_JOB_NUM"
+echo "make -j$CPU_JOB_NUM ARCH=arm64 arch/arm64/configs/vendor/gta9pwifi_eur_open_defconfig"
 
 echo
 echo 'Build android platform'
@@ -25,6 +25,6 @@ echo "source build/envsetup.sh"
 source build/envsetup.sh
 lunch aosp_arm64-user
 
-echo
+make -j$CPU_JOB_NUM ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- arch/arm64/configs/vendor/gta9pwifi_eur_open_defconfig
 make update-api
-make -j$CPU_JOB_NUM
+make -j$CPU_JOB_NUM ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
